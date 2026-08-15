@@ -30,6 +30,20 @@ const featuredPokemon = [
   "mew"
 ];
 
+const pokemonFilter = document.querySelector(".pokemon__filter");
+
+pokemonFilter.addEventListener("change", () => {
+  const selectedType = pokemonFilter.value;
+  const pokemonCards = document.querySelectorAll(".pokemon__card");
+
+  pokemonCards.forEach((card) => {
+    const hasType =
+      selectedType === "all" ||
+      card.querySelector(`.pokemon__type--${selectedType}`);
+
+    card.style.display = hasType ? "" : "none";
+  });
+});
 
 
 let lastIndex = -1;
@@ -71,11 +85,27 @@ async function displayPokemon(pokemon) {
       `;
     })
     .join("");
+  }
 
+  async function getPokemonCard(pokemon) {
+  const pokemonData = await fetchPokemonData(pokemon);
 
-  pokemonList.innerHTML += `
+  if (!pokemonData) {
+    return "";
+  }
+
+  const typesHTML = pokemonData.types
+    .map((type) => {
+      return `
+        <span class="pokemon__type pokemon__type--${type.type.name}">
+          ${type.type.name}
+        </span>
+      `;
+    })
+    .join("");
+
+  return `
     <div class="pokemon__card">
-
       <span class="pokemon__number">
         #${pokemonData.id.toString().padStart(3, "0")}
       </span>
@@ -93,15 +123,22 @@ async function displayPokemon(pokemon) {
       <div class="pokemon__types">
         ${typesHTML}
       </div>
-
     </div>
   `;
 }
 
 async function displayKantoPokemon() {
+  const pokemonList = document.querySelector(".pokemon__list");
+
+  const pokemonPromises = [];
+
   for (let i = 1; i <= 151; i++) {
-    await displayPokemon(i);
+    pokemonPromises.push(getPokemonCard(i));
   }
+
+  const pokemonCards = await Promise.all(pokemonPromises);
+
+  pokemonList.innerHTML = pokemonCards.join("");
 }
 
 const searchInput = document.querySelector(".hero__search--input");
@@ -127,6 +164,7 @@ searchInput.addEventListener("input", () => {
     card.style.display = matchesSearch ? "" : "none";
   });
 });
+
 
 displayFeaturedPokemon();
 setInterval(displayFeaturedPokemon, 5000);

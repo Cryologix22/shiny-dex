@@ -340,6 +340,62 @@ body {
   font-size: 17px;
 }
 
+.pokemon__filter {
+  margin-top: 24px;
+  padding: 12px 40px 12px 16px;
+  background-color: white;
+  color: #111;
+  border: 2px solid goldenrod;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 300ms ease;
+}
+
+.pokemon__filter:hover {
+  border-color: #111;
+}
+
+.pokemon__filter:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.25);
+}
+
+.pokemon__loading {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 20px;
+  color: goldenrod;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.loading__spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #ddd;
+  border-top-color: goldenrod;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* POKEMON GRID */
 
 .pokemon__list {
