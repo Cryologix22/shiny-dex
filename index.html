@@ -21,9 +21,10 @@
     <header class="header" id="home">
       <nav class="nav">
         <div class="nav__container">
-          <span class="nav__logo--accent">SHINY</span>
-          <span class="nav__logo">DEX</span>
-
+          <a href="#home" class="nav__brand">
+            <span class="nav__logo--accent">SHINY</span>
+            <span class="nav__logo">DEX</span>
+          </a>
           <ul class="nav__links">
             <li>
               <a href="#home" class="nav__link">Home</a>
@@ -89,9 +90,10 @@
               their shiny forms, typing, and more.
             </p>
 
-            <form class="hero__search">
+            <form class="hero__search" id="pokemonSearchForm">
               <input
                 type="text"
+                id="pokemonSearch"
                 class="hero__search--input"
                 placeholder="Search by Name or Pokédex #"
               />
@@ -151,7 +153,7 @@
               a searchable and responsive frontend experience.
             </p>
 
-            <p class="about__description">
+            <p class="about__stack">
               Built with HTML, CSS, JavaScript, and PokéAPI.
             </p>
           </div>
@@ -162,8 +164,9 @@
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer__container">
-        <a href="#home" class="footer__logo">
-          <span class="footer__logo--accent">SHINY</span>DEX
+        <a href="#home" class="footer__brand">
+          <span class="footer__logo--accent">SHINY</span>
+          <span class="footer__logo">DEX</span>
         </a>
 
         <div class="footer__links">
